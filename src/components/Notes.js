@@ -1,16 +1,28 @@
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-function Notes({ deleteNote, note, setSubject, setNotesDetail }) {
+function Notes({ deleteNote, note, onType: onTypeNote }) {
+  const updateTitle = (e) => {
+    const updatedValue = e.target.value;
+    const editMeId = note.id;
+    onTypeNote(editMeId, "title", updatedValue);
+  };
+
+  const updateDescription = (e) => {
+    const updatedValue = e.target.value;
+    const editMeId = note.id;
+    onTypeNote(editMeId, "description", updatedValue);
+  };
+
   return (
-    <div className="card shadow-lg w-80 rounded-lg">
-      <div className="flex justify-between items-center bg-sky-100  rounded-t-lg">
+    <div className="shadow-lg w-80 rounded-lg my-2" >
+      <div className="flex justify-between items-center bg-sky-100 rounded-t-lg">
         <input
-          defaultValue={note.sub}
           type="text"
-          placeholder="Subject"
-          className="py-3 px-4 bg-sky-100 max-w-xs text-black placeholder:text-gray-600"
-          onBlur={(e) => setSubject(e.target.value)}
+          placeholder="Title"
+          className="py-3 px-4 bg-sky-100 max-w-xs text-black outline-none placeholder:text-gray-600"
+            value={note?.title}
+          onChange={updateTitle}
         />
         <button onClick={() => deleteNote(note.id)}>
           <RiDeleteBin6Line
@@ -19,10 +31,10 @@ function Notes({ deleteNote, note, setSubject, setNotesDetail }) {
           />
         </button>
       </div>
-      <div className="bg-red-300 ">
+      <div className="bg-red-300 rounded-b-lg">
         <textarea
-          defaultValue={note.notes}
-          onBlur={(e) => setNotesDetail(e.target.value)}
+            value={note?.description}
+          onChange={updateDescription}
           placeholder="Type notes here..."
           className="py-2 px-4 w-80 h-48 bg-red-300  rounded-b-lg outline-none placeholder:text-gray-600 resize-none"
         />
