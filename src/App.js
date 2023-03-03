@@ -62,10 +62,10 @@ function App() {
     <div>
       <header className="flex justify-center items-center py-4 px-8 rounded-b-2xl bg-sky-100">
         <img className="w-10 h-10 " src={logo} alt="" />
-        <h1 className="text-xl font-bold ml-4">Super Sticky Notes</h1>
+        <h1 className="text-xl font-semibold ml-4">Super Sticky Notes</h1>
       </header>
       <div className="container mx-auto flex flex-col justify-center items-center px-4">
-        <div className=" mt-10 mb-6 py-2 text-white rounded-lg bg-green-400 px-4">
+        <div className=" mt-10 mb-6 py-2 text-white rounded-lg bg-green-500 px-4">
           <button
             onClick={addNewNotes}
             className="font-bold flex justify-center items-center text-xl"

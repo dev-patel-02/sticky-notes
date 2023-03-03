@@ -24,7 +24,7 @@ function Notes({ deleteNote, note, onType: onTypeNote }) {
             value={note?.title}
           onChange={updateTitle}
         />
-        <button onClick={() => deleteNote(note.id)}>
+        <button id="al" aria-label="Name" onClick={() => deleteNote(note.id)}>
           <RiDeleteBin6Line
             size={24}
             className="mr-2 bg-red-500 text-white rounded-full p-1 w-8 h-8"
