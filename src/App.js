@@ -1,8 +1,12 @@
+import React from "react";
 import "./App.css";
 import { RiAddCircleLine } from "react-icons/ri";
 import Notes from "./components/Notes";
 import { useEffect, useState } from "react";
 import logo from "../src/images/logo.png";
+import ReactDOM from "react-dom/client";
+import { axe } from "@axe-core/react";
+
 function App() {
   const [notes, setNotes] = useState([
     {
@@ -65,7 +69,7 @@ function App() {
         <h1 className="text-xl font-semibold ml-4">Super Sticky Notes</h1>
       </header>
       <div className="container mx-auto flex flex-col justify-center items-center px-4">
-        <div className=" mt-10 mb-6 py-2 text-white rounded-lg bg-green-500 px-4">
+        <div className=" mt-10 mb-6 py-2 text-white rounded-lg bg-green-600 px-4">
           <button
             onClick={addNewNotes}
             className="font-bold flex justify-center items-center text-xl"
@@ -79,7 +83,7 @@ function App() {
         <input
           onChange={(e) => setSearchNote(e.target.value)}
           placeholder="Type here to Search"
-          className="border-2 py-2 rounded-md shadow-md px-4 w-full max-w-xs block mb-8 outline-none"
+          className="border-2 py-2 rounded-md shadow-md px-4 w-full max-w-xs block mb-8 outline-none placeholder:text-black"
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 justify-items-center font-sans">
           {notes
@@ -111,3 +115,7 @@ function App() {
 }
 
 export default App;
+if (process.env.NODE_ENV !== "production") {
+  const axe = require("@axe-core/react");
+  axe(React, ReactDOM, 1000);
+}
