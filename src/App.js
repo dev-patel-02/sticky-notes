@@ -4,29 +4,29 @@ import { RiAddCircleLine } from "react-icons/ri";
 import Notes from "./components/Notes";
 import { useEffect, useState } from "react";
 import logo from "../src/images/logo.png";
-import ReactDOM from "react-dom/client";
-import { axe } from "@axe-core/react";
+// import ReactDOM from "react-dom/client";
+// import { axe } from "@axe-core/react";
+
+const getItem = () => {
+  let notes = localStorage.getItem("notes");
+  if (notes) {
+    return JSON.parse(localStorage.getItem("notes"));
+  } else {
+    return [
+      {
+        id: Date.now(),
+        title: "",
+        description: "",
+      },
+    ];
+  }
+};
 
 function App() {
-  const [notes, setNotes] = useState([
-    {
-      id: Date.now(),
-      title: "",
-      description: "",
-    },
-  ]);
+  const [notes, setNotes] = useState(getItem());
   const [subject, setSubject] = useState("");
   const [notesDetail, setNotesDetail] = useState("");
   const [searchNote, setSearchNote] = useState("");
-
-// getting data from local storage
-  useEffect(() => {
-    const stringifedNotes = localStorage.getItem("notes");
-    if (stringifedNotes) {
-      const savedNotes = JSON.parse(stringifedNotes);
-      setNotes(savedNotes);
-    }
-  }, []);
 
   const onType = (editMeId, updatedKey, updatedValue) => {
     const updatedNotes = notes.map((note) => {
@@ -44,9 +44,7 @@ function App() {
     });
     setNotes(updatedNotes);
     //set data according to type
-    localStorage.setItem("notes", JSON.stringify(notes));
   };
-
   const addNewNotes = () => {
     const newNote = {
       id: Date.now(),
@@ -63,6 +61,10 @@ function App() {
     localStorage.setItem("notes", JSON.stringify(remaining));
     setNotes(remaining);
   };
+  useEffect(() => {
+    const stringifiedNotes = JSON.stringify(notes);
+    localStorage.setItem("notes", stringifiedNotes);
+  }, [notes]);
 
   return (
     <div>
@@ -117,7 +119,7 @@ function App() {
 }
 
 export default App;
-if (process.env.NODE_ENV !== "production") {
-  const axe = require("@axe-core/react");
-  axe(React, ReactDOM, 1000);
-}
+// if (process.env.NODE_ENV !== "production") {
+//   const axe = require("@axe-core/react");
+//   axe(React, ReactDOM, 1000);
+// }
