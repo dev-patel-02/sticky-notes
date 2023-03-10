@@ -19,6 +19,7 @@ function App() {
   const [notesDetail, setNotesDetail] = useState("");
   const [searchNote, setSearchNote] = useState("");
 
+// getting data from local storage
   useEffect(() => {
     const stringifedNotes = localStorage.getItem("notes");
     if (stringifedNotes) {
@@ -42,6 +43,7 @@ function App() {
       }
     });
     setNotes(updatedNotes);
+    //set data according to type
     localStorage.setItem("notes", JSON.stringify(notes));
   };
 
